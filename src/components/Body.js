@@ -23,6 +23,7 @@ export default class Body extends React.Component {
     let response = await fetch(`https://hidden-mountain-93492.herokuapp.com/api/v1/search?city=${searchValue}`)
     let data = await response.json()
     this.setState({results: data})
+    this.setState({city: searchValue})
     this.setState({displayResults: true})
     console.log(this.state.results)
   }
@@ -37,7 +38,7 @@ export default class Body extends React.Component {
       < Header currentUser={this.state.currentUser} loggedIn={this.state.loggedIn} setTheState={this.setTheState}/>
       <div>
         {!this.state.login &&  < SearchBar getSearch={this.getSearch}/> }
-        {this.state.displayResults && < SearchResults currentUser={this.state.currentUser} results={this.state.results} />}
+        {this.state.displayResults && < SearchResults city={this.state.city} currentUser={this.state.currentUser} results={this.state.results} />}
         {this.state.login && < Login setTheState={this.setTheState} /> }
       </div>
     </div>
